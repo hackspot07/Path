@@ -3,21 +3,28 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 
+
 public class PathTest{
+	private Map<String, List<String>> getDB()throws Exception{
+		return PathReader.getPathByReadFile("path.txt");
+	}
 	@Test 
 	public void pathWillReturnTruefromBangaloreToSingapore()throws Exception{
-		boolean getPathStatus  = PathFinder.path("Bangalore","Singapore");
+		PathFinder pf = new PathFinder(getDB());
+		boolean getPathStatus  = pf.path("Bangalore","Singapore");
 		assertEquals(getPathStatus,true);
 	}
 	@Test 
 	public void pathWillReturntruefromBangaloreToSeoul()throws Exception{
-		boolean getPathStatus  = PathFinder.path("Bangalore","Seoul");
+		PathFinder pf = new PathFinder(getDB());
+		boolean getPathStatus  = pf.path("Bangalore","Seoul");
 		assertEquals(getPathStatus,true);
 	}
 	@Test 
 	public void pathWillReturnNocityAsGivenSource()throws Exception{
+		PathFinder pf = new PathFinder(getDB());
 		try{
-			PathFinder.path("Mumbai","Seoul");
+			pf.path("Mumbai","Seoul");
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 			assertEquals(e.getMessage(), "No city Named Mumbai");
@@ -25,40 +32,41 @@ public class PathTest{
 	}
 	@Test 
 	public void pathWillReturnNocityAsGivenDestination()throws Exception{
+		PathFinder pf = new PathFinder(getDB());
 		try{
-			PathFinder.path("Bangalore","Mumbai");
+			pf.path("Bangalore","Mumbai");
 		}catch(Exception e){
 			assertEquals(e.getMessage(), "No city Named Mumbai");
 		}
 	}
 	@Test 
 	public void pathWillReturntruewForSingaporeToDubai()throws Exception{
-		boolean getPathStatus  = PathFinder.path("Singapore","Dubai");
+		PathFinder pf = new PathFinder(getDB());
+		boolean getPathStatus  = pf.path("Singapore","Dubai");
 		assertEquals(getPathStatus,true);
 	}
 	@Test 
 	public void pathWillReturntruewForSingaporeToSeoul()throws Exception{
-		boolean getPathStatus  = PathFinder.path("Singapore","Seoul");
+		PathFinder pf = new PathFinder(getDB());
+		boolean getPathStatus  = pf.path("Singapore","Seoul");
 		assertEquals(getPathStatus,true);
 	}
 	@Test 
 	public void pathWillReturnTrueFromBangaloretoTokyo()throws Exception{
-		boolean getPathStatus  = PathFinder.path("Bangalore","Tokyo");
-		assertEquals(getPathStatus,true);
-	}
-	@Test 
-	public void pathWillReturnTrueFromBangaloretoLucknow()throws Exception{
-		boolean getPathStatus  = PathFinder.path("Bangalore","Lucknow");
+		PathFinder pf = new PathFinder(getDB());
+		boolean getPathStatus  = pf.path("Bangalore","Tokyo");
 		assertEquals(getPathStatus,true);
 	}
 	@Test 
 	public void pathWillReturnTrueFromTokyotoBangalore()throws Exception{
-		boolean getPathStatus  = PathFinder.path("Tokyo","Bangalore");
+		PathFinder pf = new PathFinder(getDB());
+		boolean getPathStatus  = pf.path("Tokyo","Bangalore");
 		assertEquals(getPathStatus,true);
 	}
 	@Test 
 	public void pathWillReturnfalseFromTokyotoPak()throws Exception{
-		boolean getPathStatus  = PathFinder.path("Tokyo","Pak");
+		PathFinder pf = new PathFinder(getDB());
+		boolean getPathStatus  = pf.path("Tokyo","Pak");
 		assertEquals(getPathStatus,false);
 	}
 };
