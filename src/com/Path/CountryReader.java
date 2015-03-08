@@ -1,4 +1,5 @@
 package com.Path;
+import com.Path.PathReader;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,16 +9,9 @@ import java.util.List;
 import java.util.Map;
 
 public class CountryReader{
-    private String file;
-    private String countryFile;
-
-    public CountryReader(String file,String countryFile){
-        this.file = file;
-        this.countryFile = countryFile;
-    }
     public static Map<String,List<String>> getPathWithCountry(String file,String countryFile)throws Exception{
         Map<String,List<String>> countryMap = new HashMap<String,List<String>>();
-        Map<String,List<String>> citylIST = PathReader.getPathByReadFile(file);
+        Map<String,List<String>> cityMap = PathReader.getPathByReadFile(file);
         try{
             BufferedReader fr = new BufferedReader(new FileReader(file));
             String line ="";
