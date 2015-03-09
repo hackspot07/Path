@@ -6,7 +6,7 @@ import java.util.Map;
 public class ArgumentSeperator{
 	private Map<Integer,String> args;
 	public ArgumentSeperator(String[] args){
-		this.args = new HashMap<Integer,String>();
+        this.args = new HashMap<Integer, String>();
 		int i = 4;
 		for(String arg: args){
 			if(arg.equals("-f"))

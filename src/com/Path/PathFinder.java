@@ -5,8 +5,8 @@ import java.util.*;
 public class PathFinder{
 	private Map<String, List<String>> db = new HashMap<String, List<String>>();
 
-    private Set<String> visitedPath = new HashSet<String>();
-    private ArrayList<String> root = new ArrayList<String>();
+    private static Set<String> visitedPath = new HashSet<String>();
+    private static ArrayList<String> root = new ArrayList<String>();
 
 	public PathFinder(Map<String, List<String>> db){
 		this.db = db;
