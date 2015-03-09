@@ -5,12 +5,12 @@ import java.util.*;
 public class PathFinder{
 	private Map<String, List<String>> db = new HashMap<String, List<String>>();
 
+    private Set<String> visitedPath = new HashSet<String>();
+    private ArrayList<String> root = new ArrayList<String>();
+
 	public PathFinder(Map<String, List<String>> db){
 		this.db = db;
 	}
-
-	private static Set<String> visitedPath = new HashSet<String>();
-    private static ArrayList<String> root = new ArrayList<String>();
 
    
 	public boolean path(String source,String destination)throws Exception{
@@ -41,7 +41,6 @@ public class PathFinder{
 		if(list!=null){
 			if(list.contains(destination)){
 				root.add(destination);
-				printPath(root);
 				return true;
 			}
 			for(String src : db.get(source)){
@@ -67,12 +66,15 @@ public class PathFinder{
 		return (db.containsKey(source)) ? source : getKey(source);
 	}
 
-	private  static void printPath(ArrayList<String> root){
+	public void printPath(ArrayList<String> root){
 		String r = "";
 		for(String item : root){
 			r = r.concat("->"+item);
 		}
 		System.out.println(r);
 	}
+    public ArrayList<String> getRoot(){
+        return root;
+    }
 };
 

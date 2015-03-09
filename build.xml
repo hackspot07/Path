@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <project name="Path" basedir="." default="PathTest">
     <property name="src" value="."/>
     <property name="build.dir"   value="."/>

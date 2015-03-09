@@ -1,5 +1,4 @@
 package com.Path;
-import com.Path.PathReader;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -9,21 +8,44 @@ import java.util.List;
 import java.util.Map;
 
 public class CountryReader{
-    public static Map<String,List<String>> getPathWithCountry(String file,String countryFile)throws Exception{
+    private  String countryFile;
+    public CountryReader(String file,String countryFile){
+        this.countryFile = countryFile;
+    }
+
+    public static Map<String,List<String>> getPathWithCountry(String countryFile)throws Exception{
         Map<String,List<String>> countryMap = new HashMap<String,List<String>>();
-        Map<String,List<String>> cityMap = PathReader.getPathByReadFile(file);
         try{
-            BufferedReader fr = new BufferedReader(new FileReader(file));
+            BufferedReader fr = new BufferedReader(new FileReader(countryFile));
             String line ="";
             while((line=fr.readLine())!=null){
                 String path[] = line.split(",");
                 List<String> list = new ArrayList<String>();
-                //write code here to make map
+                if(countryMap.get(path[1])!=null){
+                    list = countryMap.get(path[1]);
+                    list.add(path[0]);
+                }else{
+                    list.add(path[0]);
+                }
                 countryMap.put(path[1],list);
             }
         }catch(Exception e){
             throw new Exception("Database country File not found");
         }
         return countryMap;
+    }
+    public static String getCountry(String city,Map<String,List<String>> countryMap){
+        for(String country: countryMap.keySet()){
+            if(country.equals(city) || countryMap.get(country).contains(city))
+                return country;
+        }
+        return null;
+    }
+    public static void printWithCountry(ArrayList<String> root, Map<String,List<String>> countryMap){
+        String r = "";
+        for(String item : root){
+            r = r.concat("->"+item+"["+getCountry(item,countryMap)+"]");
+        }
+        System.out.println(r);
     }
 }
