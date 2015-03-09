@@ -1,3 +1,5 @@
+package com.Path;
+
 import com.Path.Database;
 import com.Path.PathFinder;
 import org.junit.Test;

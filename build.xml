@@ -1,5 +1,5 @@
 <!--suppress ALL -->
-<project name="Path" basedir="." default="PathTest">
+<project name="Path" basedir="." default="com.Path.PathTest">
     <property name="src" value="."/>
     <property name="build.dir"   value="."/>
     <property name="classes.dir" value="${build.dir}/classes"/>
@@ -14,15 +14,15 @@
         <mkdir dir="${jar.dir}"/>
         <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
             <manifest>
-                <attribute name="jar" value="${PathTest}"/>
+                <attribute name="jar" value="${com.Path.PathTest}"/>
             </manifest>
         </jar>
     </target>
 
-    <target name="PathTest" depends="compile,jar">
+    <target name="com.Path.PathTest" depends="compile,jar">
         <echo> runing test...........</echo>
         <java classpath="${classes.dir};./junit-4.10.jar" classname="org.junit.runner.JUnitCore">
-          <arg value="PathTest"/>
+          <arg value="com.Path.PathTest"/>
         </java>
     </target>
      <target name="clean">
