@@ -68,10 +68,4 @@ public class PathTest{
 		boolean getPathStatus  = pf.path("Tokyo","Bangalore");
 		assertEquals(getPathStatus,true);
 	}
-	@Test
-	public void pathWillReturnfalseFromTokyotoPak()throws Exception{
-		PathFinder pf = new PathFinder(getDB());
-		boolean getPathStatus  = pf.path("Tokyo","Pak");
-		assertEquals(getPathStatus,false);
-	}
 };

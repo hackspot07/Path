@@ -7,8 +7,10 @@ public class PathFinder{
 
     private static Set<String> visitedPath = new HashSet<String>();
     private static ArrayList<String> root = new ArrayList<String>();
+    private static Map<Integer,ArrayList<String>> allPaths  = new HashMap<Integer,ArrayList<String>>();
+    private int count;
 
-	public PathFinder(Map<String, List<String>> db){
+    public PathFinder(Map<String, List<String>> db){
 		this.db = db;
 	}
 
@@ -22,7 +24,7 @@ public class PathFinder{
 			throw new Exception("No city Named "+destination);
 		}
 		root.add(source);
-		source = madeKey(source);
+//		source = madeKey(source);
 		result = hasPath(source,destination) ? true : hasPath(destination,source);
 		return result;
 	}
@@ -41,14 +43,19 @@ public class PathFinder{
 		if(list!=null){
 			if(list.contains(destination)){
 				root.add(destination);
-				return true;
+                allPaths.put(++count,(ArrayList<String>)root.clone());
+                root.remove(destination);
+                return true;
 			}
 			for(String src : db.get(source)){
 				if(!visitedPath.contains(src))
                 	root.add(src);
-				if(hasPath(src,destination))
-					return true;
-			}	
+				if(hasPath(src,destination)) {
+
+                }
+                root.remove(src);
+			}
+            return true;
 		}; 
 		return false;
 	}
@@ -66,15 +73,19 @@ public class PathFinder{
 		return (db.containsKey(source)) ? source : getKey(source);
 	}
 
-	public void printPath(ArrayList<String> root){
+	public void printPath(Map<Integer, ArrayList<String>> root){
 		String r = "";
-		for(String item : root){
-			r = r.concat("->"+item);
-		}
+        int count = 1;
+		for(Integer list : root.keySet()){
+            r = r.concat(list+" ");
+            for(String item : root.get(list))
+                r = r.concat("->" + item);
+            r = r.concat("\r\n");
+        }
 		System.out.println(r);
 	}
-    public ArrayList<String> getRoot(){
-        return root;
+    public Map<Integer,ArrayList<String>> getRoot(){
+        return allPaths;
     }
 };
 

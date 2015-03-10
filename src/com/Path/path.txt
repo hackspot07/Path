@@ -4,4 +4,3 @@ Singapore,Dubai
 Dubai,Seoul
 Seoul,Beijing
 Beijing,Tokyo
-India,Pak

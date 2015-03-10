@@ -16,7 +16,7 @@ public class Path {
             PathFinder pf;
             Map<Integer,String> seperatedArgs = new HashMap<Integer,String>();
             Map<String,List<String>> countryMap = new HashMap<String,List<String>>();
-            ArrayList<String> root = new ArrayList<String>();
+            Map<Integer,ArrayList<String>> root = new HashMap<Integer,ArrayList<String>>();
             ArgumentSeperator argsSeperator = new ArgumentSeperator(args);
             seperatedArgs = argsSeperator.getArgs();
 

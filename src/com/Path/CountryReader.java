@@ -41,10 +41,13 @@ public class CountryReader{
         }
         return null;
     }
-    public static void printWithCountry(ArrayList<String> root, Map<String,List<String>> countryMap){
+    public static void printWithCountry(Map<Integer, ArrayList<String>> root, Map<String,List<String>> countryMap){
         String r = "";
-        for(String item : root){
-            r = r.concat("->"+item+"["+getCountry(item,countryMap)+"]");
+        for(Integer list : root.keySet()){
+            r = r.concat(list+" ");
+            for(String item : root.get(list))
+                r = r.concat("->"+item+"["+getCountry(item,countryMap)+"]");
+            r = r.concat("\r\n");
         }
         System.out.println(r);
     }
