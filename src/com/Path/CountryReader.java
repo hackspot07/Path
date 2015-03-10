@@ -44,7 +44,8 @@ public class CountryReader{
     public static void printWithCountry(Map<Integer, ArrayList<String>> root, Map<String,List<String>> countryMap){
         String r = "";
         for(Integer list : root.keySet()){
-            r = r.concat(list+" ");
+            if(root.size()>=2)
+                r = r.concat(list+" ");
             for(String item : root.get(list))
                 r = r.concat("->"+item+"["+getCountry(item,countryMap)+"]");
             r = r.concat("\r\n");

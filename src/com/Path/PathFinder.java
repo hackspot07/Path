@@ -77,7 +77,8 @@ public class PathFinder{
 		String r = "";
         int count = 1;
 		for(Integer list : root.keySet()){
-            r = r.concat(list+" ");
+            if(root.size()>=2)
+                r = r.concat(list+" ");
             for(String item : root.get(list))
                 r = r.concat("->" + item);
             r = r.concat("\r\n");
