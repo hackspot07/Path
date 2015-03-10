@@ -38,17 +38,8 @@ public class Path {
                 System.out.println(getStatus);
                 return ;
             }
-
-            if(!seperatedArgs.containsKey(0) && !seperatedArgs.containsKey(2)) {
-                pf = new PathFinder(Database.createDbDatabase());
-                getStatus = pf.path(seperatedArgs.get(5),seperatedArgs.get(6));
-                root = pf.getRoot();
-                pf.printPath(root,isallPath);
-                System.out.println(getStatus);
-                return ;
-            }
 			else {
-                throw new Exception("You give flag for file Please Give FileName");
+                throw new Exception("Database file not found Please Give FileName");
             }
 		}catch(Exception e){
 			System.out.println(e.getMessage());

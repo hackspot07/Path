@@ -2,6 +2,8 @@ package com.Path;
 
 import java.util.*;
 
+import static java.util.Collections.reverse;
+
 public class PathFinder{
 	private Map<String, List<String>> db = new HashMap<String, List<String>>();
 
@@ -23,9 +25,15 @@ public class PathFinder{
 		if(!isPresentCities(destination)){
 			throw new Exception("No city Named "+destination);
 		}
-		root.add(source);
-		source = madeKey(source);
-		result = hasPath(source,destination) ? true : hasPath(destination,source);
+        root.add(source);
+		result = hasPath(source,destination);
+        if(!result){
+            hasPath(destination,source);
+            for(Integer key : allPaths.keySet()){
+                reverse(allPaths.get(key));
+                allPaths.get(key).add(destination);
+            }
+        }
 		return result;
 	}
 
@@ -38,7 +46,7 @@ public class PathFinder{
 	}
 
 	public boolean hasPath(String source,String destination){
-		visitedPath.add(source); 
+        visitedPath.add(source);
 		List<String> list = db.get(source);
 		if(list!=null){
 			if(list.contains(destination)){
@@ -59,19 +67,6 @@ public class PathFinder{
             return true;
 		};
 		return false;
-	}
-
-	public String getKey(String value){
-		for(String key: db.keySet()){
-			if(db.get(key).contains(value)){
-				return key;
-			}
-		}
-		return null;
-	}
-
-	public String madeKey(String source){
-		return (db.containsKey(source)) ? source : getKey(source);
 	}
 
 	public void printPath(Map<Integer, ArrayList<String>> root, boolean isallPath){
