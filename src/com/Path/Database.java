@@ -15,6 +15,9 @@ public class Database{
 		singapore.add("Seoul");
 		singapore.add("Dubai");
 		db.put("Singapore",singapore);
+        List<String> dubai = new ArrayList<String>();
+        dubai.add("Seoul");
+        db.put("Dubai",dubai);
 		List<String> seoul = new ArrayList<String>();
 		seoul.add("Beijing");
 		db.put("Seoul",seoul);

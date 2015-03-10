@@ -24,7 +24,7 @@ public class PathFinder{
 			throw new Exception("No city Named "+destination);
 		}
 		root.add(source);
-//		source = madeKey(source);
+		source = madeKey(source);
 		result = hasPath(source,destination) ? true : hasPath(destination,source);
 		return result;
 	}
@@ -44,10 +44,11 @@ public class PathFinder{
 			if(list.contains(destination)){
 				root.add(destination);
                 allPaths.put(++count,(ArrayList<String>)root.clone());
+                visitedPath.clear();
                 root.remove(destination);
                 return true;
 			}
-			for(String src : db.get(source)){
+			for(String src : list){
 				if(!visitedPath.contains(src))
                 	root.add(src);
 				if(hasPath(src,destination)) {
@@ -56,7 +57,7 @@ public class PathFinder{
                 root.remove(src);
 			}
             return true;
-		}; 
+		};
 		return false;
 	}
 
