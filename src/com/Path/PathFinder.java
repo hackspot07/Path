@@ -73,7 +73,7 @@ public class PathFinder{
 		return (db.containsKey(source)) ? source : getKey(source);
 	}
 
-	public void printPath(Map<Integer, ArrayList<String>> root){
+	public void printPath(Map<Integer, ArrayList<String>> root, boolean isallPath){
 		String r = "";
         int count = 1;
 		for(Integer list : root.keySet()){
@@ -82,6 +82,7 @@ public class PathFinder{
             for(String item : root.get(list))
                 r = r.concat("->" + item);
             r = r.concat("\r\n");
+            if(!isallPath) break;
         }
 		System.out.println(r);
 	}

@@ -41,7 +41,7 @@ public class CountryReader{
         }
         return null;
     }
-    public static void printWithCountry(Map<Integer, ArrayList<String>> root, Map<String,List<String>> countryMap){
+    public static void printWithCountry(Map<Integer, ArrayList<String>> root, Map<String, List<String>> countryMap, boolean isallPath){
         String r = "";
         for(Integer list : root.keySet()){
             if(root.size()>=2)
@@ -49,6 +49,7 @@ public class CountryReader{
             for(String item : root.get(list))
                 r = r.concat("->"+item+"["+getCountry(item,countryMap)+"]");
             r = r.concat("\r\n");
+            if(!isallPath) break;
         }
         System.out.println(r);
     }
