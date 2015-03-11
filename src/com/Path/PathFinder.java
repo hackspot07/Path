@@ -59,9 +59,7 @@ public class PathFinder{
 			for(String src : list){
 				if(!visitedPath.contains(src))
                 	root.add(src);
-				if(hasPath(src,destination)) {
-
-                }
+				hasPath(src,destination);
                 root.remove(src);
 			}
             return true;
@@ -69,18 +67,27 @@ public class PathFinder{
 		return false;
 	}
 
-	public void printPath(Map<Integer, ArrayList<String>> root, boolean isallPath){
-		String r = "";
+	public void printPath(Map<Integer, ArrayList<String>> root, boolean isallPath, Map<String, Integer> costTable){
+		String r = "",prev="";
+        double totalCost= 0.0;
         int count = 1;
 		for(Integer list : root.keySet()){
             if(root.size()>=2)
                 r = r.concat(list+" ");
-            for(String item : root.get(list))
+            for(String item : root.get(list)) {
+                prev = prev.concat("->"+item);
+                if(costTable.containsKey(prev)){
+                    totalCost += (double)costTable.get(prev);
+                    prev = "->"+item;
+                }
                 r = r.concat("->" + item);
+            }
+            r = r.concat("\r\n"+"Total Cost:"+totalCost);
+            System.out.println(r);
+            totalCost = 0.0;prev = "";r= "";
             r = r.concat("\r\n");
             if(!isallPath) break;
         }
-		System.out.println(r);
 	}
     public Map<Integer,ArrayList<String>> getRoot(){
         return allPaths;
