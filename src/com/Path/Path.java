@@ -25,7 +25,8 @@ public class Path {
                 countryMap = CountryReader.getPathWithCountry(seperatedArgs.get(3));
                 getStatus = pf.path(seperatedArgs.get(5),seperatedArgs.get(6));
                 root = pf.getRoot();
-                CountryReader.printWithCountry(root,countryMap,isallPath);
+                Map<String,Integer> costTable = PathReader.getCostTable();
+                CountryReader.printWithCountry(root,countryMap,isallPath,costTable);
                 System.out.println(getStatus);
                 return ;
             }
@@ -34,7 +35,8 @@ public class Path {
                 pf = new PathFinder(PathReader.getPathByReadFile(seperatedArgs.get(1)));
                 getStatus = pf.path(seperatedArgs.get(5),seperatedArgs.get(6));
                 root = pf.getRoot();
-                pf.printPath(root,isallPath);
+                Map<String,Integer> costTable = PathReader.getCostTable();
+                pf.printPath(root,isallPath,costTable);
                 System.out.println(getStatus);
                 return ;
             }

@@ -41,16 +41,23 @@ public class CountryReader{
         }
         return null;
     }
-    public static void printWithCountry(Map<Integer, ArrayList<String>> root, Map<String, List<String>> countryMap, boolean isallPath){
+    public static void printWithCountry(Map<Integer, ArrayList<String>> root, Map<String, List<String>> countryMap, boolean isallPath, Map<String, Integer> costTable){
         String r = "";
+        String prev = "";
+        double totalCost = 0.0;
         for(Integer list : root.keySet()){
-            if(root.size()>=2)
-                r = r.concat(list+" ");
-            for(String item : root.get(list))
-                r = r.concat("->"+item+"["+getCountry(item,countryMap)+"]");
-            r = r.concat("\r\n");
+            for(String item : root.get(list)) {
+                prev = prev.concat("->"+item);
+                if(costTable.containsKey(prev)){
+                    totalCost += (double)costTable.get(prev);
+                    prev = "->"+item;
+                }
+                r = r.concat("->" + item + "[" + getCountry(item, countryMap) + "]");
+            }
+            r = r.concat("\r\n"+"Total Cost:"+totalCost);
+            System.out.println(r);
+            totalCost = 0.0;prev = "";r= "";
             if(!isallPath) break;
         }
-        System.out.println(r);
     }
 }

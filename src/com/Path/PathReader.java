@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Map;
 
 public class PathReader{
+    private static Map<String,Integer> costTable = new HashMap<String,Integer>();
 	public static Map<String,List<String>> getPathByReadFile(String file) throws Exception{
-		Map<String,List<String>> db = new HashMap<String,List<String>>();
-		try{ 
+        Map<String,List<String>> db = new HashMap<String,List<String>>();
+		try{
 			BufferedReader fr = new BufferedReader(new FileReader(file));
 			String line ="";
 			while((line=fr.readLine())!=null){
@@ -23,10 +24,15 @@ public class PathReader{
 					list.add(path[1]);
 				}	
 				db.put(path[0],list);
+                String key= "->"+path[0].concat("->"+path[1]);
+                costTable.put(key,Integer.parseInt(path[2]));
 			}
 		}catch(Exception e){
 			throw new Exception("Database File not found");
 		}
 		return db;
 	}
+    public static Map<String,Integer> getCostTable(){
+        return costTable;
+    }
 }
