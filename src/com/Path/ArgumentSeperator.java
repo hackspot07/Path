@@ -4,28 +4,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ArgumentSeperator{
-	private Map<Integer,String> args;
-	public ArgumentSeperator(String[] args){
-        this.args = new HashMap<Integer, String>();
-		int i = 5;
-		for(String arg: args){
-			if(arg.equals("-f"))
-				this.args.put(0,arg);
-			if(arg.indexOf(".txt")>=0 && !this.args.containsKey(1)) 
-           		this.args.put(1,arg);
-			if(arg.equals("-c"))
-				this.args.put(2,arg);
-			if(arg.indexOf(".txt")>=0 && this.args.containsKey(1))
-				this.args.put(3,arg);
+    public static  Map<Integer,String> getArgs(String[] args){
+        Map<Integer,String> seperatedArgs= new HashMap<Integer,String>();
+        int i = 5;
+        for(String arg: args){
+            if(arg.equals("-f"))
+                seperatedArgs.put(0,arg);
+            if(arg.indexOf(".txt")>=0 && !seperatedArgs.containsKey(1))
+                seperatedArgs.put(1,arg);
+            if(arg.equals("-c"))
+                seperatedArgs.put(2,arg);
+            if(arg.indexOf(".txt")>=0 && seperatedArgs.containsKey(1))
+                seperatedArgs.put(3,arg);
             if(arg.equals("-a"))
-                this.args.put(4,arg);
-			if(!arg.equals("-f") && !(arg.indexOf(".txt")>=0) && !arg.equals("-c") && !arg.equals("-a")){
-				this.args.put(i,arg);
-				i = i+1;
-			}
-		}
-	}
-	public Map<Integer,String> getArgs(){
-        return args;
+                seperatedArgs.put(4,arg);
+            if(!arg.equals("-f") && !(arg.indexOf(".txt")>=0) && !arg.equals("-c") && !arg.equals("-a") && i<=6){
+                seperatedArgs.put(i,arg);
+                i = i+1;
+            }
+        }
+        return seperatedArgs;
 	}
 }

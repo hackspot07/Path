@@ -49,7 +49,7 @@ public class PathFinder{
         visitedPath.add(source);
 		List<String> list = db.get(source);
 		if(list!=null){
-			if(list.contains(destination)){
+            if(list.contains(destination)){
 				root.add(destination);
                 allPaths.put(++count,(ArrayList<String>)root.clone());
                 visitedPath.clear();
@@ -70,7 +70,6 @@ public class PathFinder{
 	public void printPath(Map<Integer, ArrayList<String>> root, boolean isallPath, Map<String, Integer> costTable){
 		String r = "",prev="";
         double totalCost= 0.0;
-        int count = 1;
 		for(Integer list : root.keySet()){
             if(root.size()>=2)
                 r = r.concat(list+" ");
@@ -85,7 +84,6 @@ public class PathFinder{
             r = r.concat("\r\n"+"Total Cost:"+totalCost);
             System.out.println(r);
             totalCost = 0.0;prev = "";r= "";
-            r = r.concat("\r\n");
             if(!isallPath) break;
         }
 	}

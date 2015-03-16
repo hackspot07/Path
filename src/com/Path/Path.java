@@ -17,10 +17,10 @@ public class Path {
             Map<Integer,String> seperatedArgs = new HashMap<Integer,String>();
             Map<String,List<String>> countryMap = new HashMap<String,List<String>>();
             Map<Integer,ArrayList<String>> root = new HashMap<Integer,ArrayList<String>>();
-            ArgumentSeperator argsSeperator = new ArgumentSeperator(args);
-            seperatedArgs = argsSeperator.getArgs();
+            seperatedArgs = ArgumentSeperator.getArgs(args);
             isallPath = (seperatedArgs.containsKey(4)) ? true : false;
-			if(seperatedArgs.containsKey(0) && seperatedArgs.containsKey(1) && seperatedArgs.containsKey(2) && seperatedArgs.containsKey(3)){
+
+			if(seperatedArgs.size()==6){
                 pf = new PathFinder(PathReader.getPathByReadFile(seperatedArgs.get(1)));
                 countryMap = CountryReader.getPathWithCountry(seperatedArgs.get(3));
                 getStatus = pf.path(seperatedArgs.get(5),seperatedArgs.get(6));
